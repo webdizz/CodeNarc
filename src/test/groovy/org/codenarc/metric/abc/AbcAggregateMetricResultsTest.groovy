@@ -34,7 +34,7 @@ class AbcAggregateMetricResultsTest extends AbstractAbcTest {
     }
 
     void testAverageValueForNoVectorsIsZero() {
-        assert abcAggregateMetricResults.totalValue == 0
+        assert abcAggregateMetricResults.averageValue == 0
     }
 
     void testTotalValueForNoVectorsIsZero() {

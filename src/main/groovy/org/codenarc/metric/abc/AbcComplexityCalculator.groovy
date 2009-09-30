@@ -20,6 +20,7 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.util.AstUtil
+import org.codenarc.metric.loc.AbstractMethodMetric
 
 /**
  * Calculate the ABC Metric for a class/method.
@@ -51,27 +52,7 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityCalculator {
-    SourceCode sourceCode
-
-    def calculate(ClassNode classNode) {
-        def abcAggregateMetricResults = new AbcAggregateMetricResults()
-
-        def realMethods = classNode.methods.findAll { methodNode -> !AstUtil.isFromGeneratedSourceCode(methodNode) }
-        realMethods.each { methodNode ->
-            def methodResults = calculate(methodNode)
-            abcAggregateMetricResults.add(methodNode.name, methodResults)
-        }
-
-        def closureFields = classNode.fields.find { fieldNode -> !AstUtil.isFromGeneratedSourceCode(fieldNode) &&
-            fieldNode.initialExpression instanceof ClosureExpression }
-        closureFields.each { fieldNode ->
-            def fieldResults = calculate(fieldNode.initialExpression)
-            abcAggregateMetricResults.add(fieldNode.name, fieldResults)
-        }
-
-        return abcAggregateMetricResults
-    }
+class AbcComplexityCalculator extends AbstractMethodMetric {
 
     def calculate(MethodNode methodNode) {
         def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
@@ -85,6 +66,10 @@ class AbcComplexityCalculator {
         visitor.visitClosureExpression(closureExpression) 
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
         return new AbcMetricResult(abcVector)
+    }
+
+    protected createAggregateMetricResults() {
+        return new AbcAggregateMetricResults()
     }
 
 }
