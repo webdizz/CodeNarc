@@ -15,11 +15,8 @@
 */
 package org.codenarc.metric.abc
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codenarc.util.AstUtil
 import org.codenarc.metric.loc.AbstractMethodMetric
 
 /**

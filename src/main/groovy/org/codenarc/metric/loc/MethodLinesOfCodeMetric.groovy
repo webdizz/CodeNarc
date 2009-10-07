@@ -15,13 +15,9 @@
 */
 package org.codenarc.metric.loc
 
-import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
-import org.codenarc.source.SourceCode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.metric.NumberMetricResult
-import org.codenarc.metric.NumberMetricResults
-import org.codenarc.util.AstUtil
 
 /**
  * Metric for counting the lines of code for methods and closure fields.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.loc
+package org.codenarc.metric
 
 import org.codenarc.test.AbstractTest
 import org.codenarc.source.SourceString

@@ -15,6 +15,8 @@
  */
 package org.codenarc.metric.loc
 
+import org.codenarc.metric.AbstractMetricTest
+
 /**
  * Tests for MethodLinesOfCodeMetric - calculate aggregate metrics for a class
  *
