@@ -24,19 +24,39 @@ import org.codenarc.metric.abc.AbstractAbcTest
  * @version $Revision$ - $Date$
  */
 class NumberMetricResultTest extends AbstractAbcTest {
+    private static final METRIC = [:] as Metric
 
-    void testPassingNullIntoConstructorThrowsException() {
-        shouldFailWithMessageContaining('number') { new NumberMetricResult(null) } 
+    void testPassingNullMetricIntoConstructorThrowsException() {
+        shouldFailWithMessageContaining('metric') { new NumberMetricResult(null, 1) }
     }
 
-    void testGetValueIsSameIntegerValuePassedIntoConstructor() {
-        def result = new NumberMetricResult(23)
-        assert result.getValue() == 23
+    void testPassingNullValueIntoConstructorThrowsException() {
+        shouldFailWithMessageContaining('number') { new NumberMetricResult(METRIC, null) }
     }
 
-    void testGetValueIsSameBigDecimalValuePassedIntoConstructor() {
-        def result = new NumberMetricResult(0.23456)
-        assert result.getValue() == 0.23456
+    void testGetMetricIsSameIntegerValuePassedIntoConstructor() {
+        def result = new NumberMetricResult(METRIC, 23)
+        assert result.getMetric() == METRIC
+    }
+
+    void testGetTotalValueIsSameIntegerValuePassedIntoConstructor() {
+        def result = new NumberMetricResult(METRIC, 23)
+        assert result.getTotalValue() == 23
+    }
+
+    void testGetTotalValueIsSameBigDecimalValuePassedIntoConstructor() {
+        def result = new NumberMetricResult(METRIC, 0.23456)
+        assert result.getTotalValue() == 0.23456
+    }
+
+    void testGetAverageValueIsSameIntegerValuePassedIntoConstructor() {
+        def result = new NumberMetricResult(METRIC, 23)
+        assert result.getAverageValue() == 23
+    }
+
+    void testGetCountIsOneForSingleValue() {
+        def result = new NumberMetricResult(METRIC, 0.23456)
+        assert result.getCount() == 1
     }
 
 }

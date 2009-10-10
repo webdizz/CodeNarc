@@ -18,6 +18,7 @@ package org.codenarc.metric.loc
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codenarc.metric.NumberMetricResult
+import org.codenarc.metric.AbstractMethodMetric
 
 /**
  * Metric for counting the lines of code for methods and closure fields.
@@ -30,13 +31,13 @@ class MethodLinesOfCodeMetric extends AbstractMethodMetric {
     def calculate(MethodNode methodNode) {
         def visitor = new MethodLinesOfCodeAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
-        return new NumberMetricResult(visitor.numberOfLinesInMethod)
+        return new NumberMetricResult(this, visitor.numberOfLinesInMethod)
     }
 
     def calculate(ClosureExpression closureExpression) {
         def visitor = new MethodLinesOfCodeAstVisitor(sourceCode:sourceCode)
         visitor.visitClosureExpression(closureExpression)
-        return new NumberMetricResult(visitor.numberOfLinesInClosure)
+        return new NumberMetricResult(this, visitor.numberOfLinesInClosure)
     }
 
 }

@@ -22,11 +22,26 @@ package org.codenarc.metric
  * @version $Revision$ - $Date$
  */
 class NumberMetricResult implements MetricResult {
+    final Metric metric
     final number
 
-    NumberMetricResult(number) {
+    NumberMetricResult(Metric metric, number) {
+        assert metric != null
         assert number != null
+        this.metric = metric
         this.number = number
+    }
+
+    int getCount() {
+        return 1
+    }
+
+    Object getTotalValue() {
+        return number
+    }
+
+    Object getAverageValue() {
+        return number
     }
 
     Object getValue() {
@@ -34,7 +49,7 @@ class NumberMetricResult implements MetricResult {
     }
 
     String toString() {
-        "NumberMetricResult[$number]"
+        "NumberMetricResult[metric=$metric, $number]"
     }
 
 }

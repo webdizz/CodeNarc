@@ -16,14 +16,19 @@
 package org.codenarc.metric
 
 /**
- * Represents the aggregate results from applying a metric to multiple source units (e.g. methods, classes).
+ * Enum representing the level at which a metric is applied - either method, class or package
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 224 $ - $Date: 2009-09-22 22:04:03 -0400 (Tue, 22 Sep 2009) $
  */
-interface AggregateMetricResult {
+class MetricLevel {
+    public static final METHOD = new MetricLevel('method')
+    public static final CLASS = new MetricLevel('class')
+    public static final PACKAGE = new MetricLevel('package')
 
-    Object getTotalValue()
-    Object getAverageValue()
+    private final String name
 
+    private MetricLevel(String name) {
+        this.name = name
+    }
 }

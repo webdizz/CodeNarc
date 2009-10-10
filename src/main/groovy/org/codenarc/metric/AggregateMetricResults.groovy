@@ -21,9 +21,10 @@ package org.codenarc.metric
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-interface AggregateMetricResult {
+interface AggregateMetricResults {
 
     Object getTotalValue()
     Object getAverageValue()
+    Map getChildren()
 
 }

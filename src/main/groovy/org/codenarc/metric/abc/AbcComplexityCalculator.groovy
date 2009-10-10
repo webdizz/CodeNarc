@@ -17,7 +17,7 @@ package org.codenarc.metric.abc
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codenarc.metric.loc.AbstractMethodMetric
+import org.codenarc.metric.AbstractMethodMetric
 
 /**
  * Calculate the ABC Metric for a class/method.

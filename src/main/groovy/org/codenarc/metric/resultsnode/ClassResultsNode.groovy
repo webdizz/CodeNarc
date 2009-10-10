@@ -13,17 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric
+package org.codenarc.metric.resultsnode
 
 /**
- * Represents the aggregate results from applying a metric to multiple source units (e.g. methods, classes).
+ * Represents a set of zero or more metric results for a single class
  *
  * @author Chris Mair
- * @version $Revision$ - $Date$
+ * @version $Revision: 228 $ - $Date: 2009-09-29 21:52:31 -0400 (Tue, 29 Sep 2009) $
  */
-interface AggregateMetricResult {
+class ClassResultsNode {
+    final Map methods
+    final List metricValues
 
-    Object getTotalValue()
-    Object getAverageValue()
+    ClassResultsNode(List metricValues, Map methods) {
+        this.methods = methods?.asImmutable()
+        this.metricValues = metricValues?.asImmutable()
+    }
 
+//    def getMetric(String name) {
+//        assert name
+//        return null
+//    }
 }

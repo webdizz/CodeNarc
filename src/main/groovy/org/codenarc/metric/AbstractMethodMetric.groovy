@@ -13,12 +13,11 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.codenarc.metric.loc
+package org.codenarc.metric
 
 import org.codehaus.groovy.ast.ClassNode
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codenarc.metric.NumberMetricResults
 import org.codenarc.source.SourceCode
 import org.codenarc.util.AstUtil
 
@@ -28,7 +27,7 @@ import org.codenarc.util.AstUtil
  * @author Chris Mair
  * @version $Revision: 225 $ - $Date: 2009-09-23 21:54:13 -0400 (Wed, 23 Sep 2009) $
  */
-abstract class AbstractMethodMetric {
+abstract class AbstractMethodMetric implements Metric {
     SourceCode sourceCode
 
     abstract def calculate(MethodNode methodNode)

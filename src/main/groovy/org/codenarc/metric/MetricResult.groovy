@@ -22,6 +22,10 @@ package org.codenarc.metric
  * @version $Revision$ - $Date$
  */
 interface MetricResult {
-
+//    Metric getMetric()
+//    int getCount()
+//    Object getTotalValue()
+//    Object getAverageValue()
+    
     Object getValue()
 }

@@ -15,15 +15,24 @@
  */
 package org.codenarc.metric
 
+import org.codehaus.groovy.ast.ClassNode
+import org.codenarc.metric.resultsnode.ClassResultsNode
+import org.codehaus.groovy.ast.MethodNode
+import org.codenarc.metric.resultsnode.MethodResultsNode
+
 /**
- * Represents the aggregate results from applying a metric to multiple source units (e.g. methods, classes).
+ * Represents a metric
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-interface AggregateMetricResult {
+interface Metric {
 
-    Object getTotalValue()
-    Object getAverageValue()
+//    MetricLevel getMetricLevel()
 
+//    List applyToPackage(PackageResultsNode packageResultsNode)
+    
+//    List applyToClass(ClassNode classNode, ClassResultsNode classResultsNode)
+//
+//    List applyToMethod(MethodNode classNode, MethodResultsNode methodResultsNode)
 }

@@ -24,6 +24,7 @@ import org.codenarc.test.AbstractTest
  * @version $Revision$ - $Date$
  */
 class NumberMetricResultsTest extends AbstractTest {
+    private static final METRIC = [:] as Metric
     private static final BD = [0.23, 5.01, 3.67]
     private numberMetricResults
 
@@ -40,12 +41,12 @@ class NumberMetricResultsTest extends AbstractTest {
     }
 
     void testAverageValueForASingleMetricIsThatMetricValue() {
-        numberMetricResults.add('x', new NumberMetricResult(99.5))
+        numberMetricResults.add('x', new NumberMetricResult(METRIC, 99.5))
         assert numberMetricResults.averageValue == 99.5
     }
 
     void testTotalValueForASingleMetricIsThatMetricValue() {
-        numberMetricResults.add('x', new NumberMetricResult(99.5))
+        numberMetricResults.add('x', new NumberMetricResult(METRIC, 99.5))
         assert numberMetricResults.totalValue == 99.5
     }
 
@@ -89,8 +90,8 @@ class NumberMetricResultsTest extends AbstractTest {
     }
 
     private void addThreeChildMetricResults(x, y, z) {
-        numberMetricResults.add('x', new NumberMetricResult(x))
-        numberMetricResults.add('y', new NumberMetricResult(y))
-        numberMetricResults.add('z', new NumberMetricResult(z))
+        numberMetricResults.add('x', new NumberMetricResult(METRIC, x))
+        numberMetricResults.add('y', new NumberMetricResult(METRIC, y))
+        numberMetricResults.add('z', new NumberMetricResult(METRIC, z))
     }
 }

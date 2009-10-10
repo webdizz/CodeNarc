@@ -16,14 +16,35 @@
 package org.codenarc.metric
 
 /**
- * Represents the aggregate results from applying a metric to multiple source units (e.g. methods, classes).
+ * A NumberMetricResult that aggregates multiple values
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-interface AggregateMetricResult {
+class AggregateNumberMetricResult implements AggregateMetricResult {
+    private sum
+    private count
 
-    Object getTotalValue()
-    Object getAverageValue()
+    AggregateNumberMetricResult(children) {
+        assert children != null
+        sum = children.values().inject(0) { value, child -> value + child.totalValue }
+        count = children.size()
+    }
+
+    int getCount() {
+        return count
+    }
+
+    Object getTotalValue() {
+        return sum
+    }
+
+    Object getAverageValue() {
+        return sum && count ? sum / count : 0
+    }
+
+    String toString() {
+        "NumberAggregateMetricResult[total=${}getTotalValue()}, average=${getAverageValue()}]"
+    }
 
 }
