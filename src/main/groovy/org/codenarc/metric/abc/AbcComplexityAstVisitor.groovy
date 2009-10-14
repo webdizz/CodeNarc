@@ -13,12 +13,12 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.codenarc.metric.abc
+package org.gmetrics.metric.abc
 
-import org.codenarc.rule.AbstractAstVisitor
-import org.codenarc.util.AstUtil
+import org.gmetrics.util.AstUtil
 import org.codehaus.groovy.ast.expr.*
 import org.codehaus.groovy.ast.stmt.*
+import org.gmetrics.metric.AbstractAstVisitor
 
 /**
  * AST Visitor for calculating the ABC Metric for a class/method.

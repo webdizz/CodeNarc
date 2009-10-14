@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.util.io
+package org.gmetrics.util.io
 
 /**
  * A Resource implementation for resources available on the classpath.

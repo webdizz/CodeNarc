@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.abc
+package org.gmetrics.metric.abc
 
-import org.codenarc.metric.AggregateMetricResults
-import org.codenarc.metric.MetricResult
+import org.gmetrics.metric.AggregateMetricResults
+import org.gmetrics.metric.MetricResult
 
 /**
  * A AggregateMetricResults implementation specifically for the ABC Metric.

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.util.io
+package org.gmetrics.util.io
 
-import org.codenarc.test.AbstractTest
+import org.gmetrics.test.AbstractTest
 
 /**
  * Tests for UrlResource

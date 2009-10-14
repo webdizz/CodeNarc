@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.util.io
+package org.gmetrics.util.io
 
 /**
  * Defines the interface for factory objects that create/return Resource instances.

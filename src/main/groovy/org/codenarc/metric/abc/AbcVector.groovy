@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.abc
+package org.gmetrics.metric.abc
 
 /**
  * Represents a single ABC Metric result: a vector of the three A, B, C values.

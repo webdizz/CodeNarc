@@ -13,12 +13,12 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.codenarc.metric.loc
+package org.gmetrics.metric.loc
 
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
-import org.codenarc.metric.NumberMetricResult
-import org.codenarc.metric.AbstractMethodMetric
+import org.gmetrics.metric.NumberMetricResult
+import org.gmetrics.metric.AbstractMethodMetric
 
 /**
  * Metric for counting the lines of code for methods and closure fields.

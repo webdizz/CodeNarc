@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.abc
+package org.gmetrics.metric.abc
 
-import org.codenarc.source.SourceString
-import org.codenarc.test.AbstractTest
+import org.gmetrics.source.SourceString
+import org.gmetrics.test.AbstractTest
 
 /**
  * Tests for AbcComplexityCalculator

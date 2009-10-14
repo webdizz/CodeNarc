@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.loc
+package org.gmetrics.metric.loc
 
-import org.codenarc.rule.AbstractAstVisitor
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
+import org.gmetrics.metric.AbstractAstVisitor
 
 /**
  * AST Visitor for calculating the lines of code for a method or closure field.

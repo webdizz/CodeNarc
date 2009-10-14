@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.codenarc.metric.loc
+package org.gmetrics.metric.loc
 
-import org.codenarc.metric.AbstractMetricTest
+import org.gmetrics.metric.AbstractMetricTest
 
 /**
  * Tests for MethodLinesOfCodeMetric - calculate aggregate metrics for a class
