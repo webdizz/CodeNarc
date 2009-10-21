@@ -43,6 +43,12 @@ class AbcMetricResultTest extends AbstractAbcTest {
         assert abcMetricResultValue(6, 7, 8) == new AbcVector(6, 7, 8).magnitude
     }
 
+    void testAverageAndTotalValueAreTheSameAsTheValue() {
+        def abc = abcMetricResult(1, 2, 3)
+        assert abc.totalValue == abc.value
+        assert abc.averageValue == abc.value
+    }
+
     private abcMetricResultValue(int a, int b, int c) {
         def abcMetricResult = abcMetricResult(a, b, c)
         def value = abcMetricResult.value

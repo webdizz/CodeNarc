@@ -16,6 +16,7 @@
 package org.gmetrics.metric.abc
 
 import org.gmetrics.metric.MetricResult
+import org.gmetrics.metric.Metric
 
 /**
  * A MetricResult specifically for the ABC metric
@@ -25,6 +26,7 @@ import org.gmetrics.metric.MetricResult
  */
 class AbcMetricResult implements MetricResult {
     final AbcVector abcVector
+    final Metric metric
 
     AbcMetricResult(AbcVector abcVector) {
         assert abcVector
@@ -37,6 +39,18 @@ class AbcMetricResult implements MetricResult {
      */
     Object getValue() {
         return abcVector.magnitude
+    }
+
+    Object getTotalValue() {
+        return getValue()
+    }
+
+    int getCount() {
+        return 1
+    }
+
+    Object getAverageValue() {
+        return getValue()
     }
 
     String toString() {

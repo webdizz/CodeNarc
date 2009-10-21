@@ -19,6 +19,10 @@ import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.gmetrics.metric.NumberMetricResult
 import org.gmetrics.metric.AbstractMethodMetric
+import org.gmetrics.results.ClassMetricResult
+import org.codehaus.groovy.ast.ClassNode
+import org.gmetrics.metric.AggregateNumberMetricResult
+import org.gmetrics.util.AstUtil
 
 /**
  * Metric for counting the lines of code for methods and closure fields.

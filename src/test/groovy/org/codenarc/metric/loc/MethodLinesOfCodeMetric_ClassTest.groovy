@@ -16,6 +16,7 @@
 package org.gmetrics.metric.loc
 
 import org.gmetrics.metric.AbstractMetricTest
+import org.gmetrics.metric.MetricLevel
 
 /**
  * Tests for MethodLinesOfCodeMetric - calculate aggregate metrics for a class
@@ -26,6 +27,62 @@ import org.gmetrics.metric.AbstractMetricTest
 class MethodLinesOfCodeMetric_ClassTest extends AbstractMetricTest {
     static metricClass = MethodLinesOfCodeMetric
 
+    void testMetricLevelIsMethod() {
+        assert metric.metricLevel == MetricLevel.METHOD
+    }
+
+    void testApplyToClass_ZeroResultsForClassWithNoMethods() {
+        final SOURCE = """
+            int myValue
+        """
+        assertApplyToClass(SOURCE, 0, 0, null)
+    }
+
+    void testApplyToClass_ResultsForClassWithOneMethod() {
+        final SOURCE = """
+            def a() {
+                def x = 1
+            }
+        """
+        assertApplyToClass(SOURCE, 3, 3, [a:3])
+    }
+
+    void testApplyToClass_ResultsForClassWithSeveralMethods() {
+        final SOURCE = """
+            def a() {                   // 3
+                def x = 1; y = x
+            }
+            def b() {                   // 5
+                new SomeClass(99)
+                new SomeClass().run()
+                x++
+            }
+            def c() {                   // 8
+                switch(x) {
+                    case 1: break
+                    case 3: break
+                    case 5: break
+                }
+                return x
+            }
+        """
+        assertApplyToClass(SOURCE, 16, 16/3, [a:3, b:5, c:8])
+    }
+
+    void testApplyToClass_ResultsForClassWithOneClosureField() {
+        final SOURCE = """
+            class MyClass {
+                def myClosure = {
+                    def x = 1; x++
+                    doSomething()
+                    if (x == 23) return 99 else return 0
+                }
+            }
+        """
+        assertApplyToClass(SOURCE, 5, 5, [myClosure:5])
+    }
+
+    // TODO Remove calculateForClass tests
     void testCalculate_ZeroResultsForClassWithNoMethods() {
         final SOURCE = """
             int myValue
