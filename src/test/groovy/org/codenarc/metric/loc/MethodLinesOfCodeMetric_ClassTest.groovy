@@ -17,6 +17,8 @@ package org.gmetrics.metric.loc
 
 import org.gmetrics.metric.AbstractMetricTest
 import org.gmetrics.metric.MetricLevel
+import org.gmetrics.metric.Metric
+import org.gmetrics.metric.NumberMetricResult
 
 /**
  * Tests for MethodLinesOfCodeMetric - calculate aggregate metrics for a class
@@ -82,56 +84,16 @@ class MethodLinesOfCodeMetric_ClassTest extends AbstractMetricTest {
         assertApplyToClass(SOURCE, 5, 5, [myClosure:5])
     }
 
-    // TODO Remove calculateForClass tests
-    void testCalculate_ZeroResultsForClassWithNoMethods() {
-        final SOURCE = """
-            int myValue
-        """
-        assertCalculateForClass(SOURCE, 0, 0, null)
+    void testApplyToPackage_ResultsForNoChildren() {
+        assertApplyToPackage([], 0, 0)
     }
 
-    void testCalculate_ResultsForClassWithOneMethod() {
-        final SOURCE = """
-            def a() {
-                def x = 1
-            }
-        """
-        assertCalculateForClass(SOURCE, 3, 3, [a:3])
+    void testApplyToPackage_ResultsForOneChild() {
+        assertApplyToPackage([metricResult(23)], 23, 23)
     }
 
-    void testCalculate_ResultsForClassWithSeveralMethods() {
-        final SOURCE = """
-            def a() {                   // 3
-                def x = 1; y = x
-            }
-            def b() {                   // 5
-                new SomeClass(99)
-                new SomeClass().run()
-                x++
-            }
-            def c() {                   // 8
-                switch(x) {
-                    case 1: break
-                    case 3: break
-                    case 5: break
-                }
-                return x
-            }
-        """
-        assertCalculateForClass(SOURCE, 16, 16/3, [a:3, b:5, c:8])
-    }
-
-    void testCalculate_ResultsForClassWithOneClosureField() {
-        final SOURCE = """
-            class MyClass {
-                def myClosure = {
-                    def x = 1; x++
-                    doSomething()
-                    if (x == 23) return 99 else return 0
-                }
-            }
-        """
-        assertCalculateForClass(SOURCE, 5, 5, [myClosure:5])
+    void testApplyToPackage_ResultsForThreeChildren() {
+        assertApplyToPackage([metricResult(20), metricResult(6), metricResult(4)], 30, 10)
     }
 
 }
