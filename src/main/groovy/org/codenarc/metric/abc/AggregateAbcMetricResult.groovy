@@ -15,31 +15,38 @@
  */
 package org.gmetrics.metric.abc
 
-import org.gmetrics.metric.AggregateMetricResults
 import org.gmetrics.metric.MetricResult
+import org.gmetrics.metric.Metric
 
 /**
- * A AggregateMetricResults implementation specifically for the ABC Metric.
+ * An aggregate MetricResult implementation specifically for the ABC Metric.
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcAggregateMetricResults implements AggregateMetricResults {
-    final Map children = [:]
+class AggregateAbcMetricResult implements MetricResult {
+    private count
+    final Metric metric
     private assignmentSum = 0
     private branchSum = 0
     private conditionSum = 0
-    
-    void add(String name, MetricResult metricResult) {
-        children[name] = metricResult
-        def abcVector = metricResult.abcVector
-        assignmentSum += abcVector.assignments
-        branchSum += abcVector.branches
-        conditionSum += abcVector.conditions
+    final Object value = null
+
+    AggregateAbcMetricResult(Metric metric, Collection children) {
+        assert metric != null
+        assert children != null
+        this.metric = metric
+        children.each { child ->
+            def abcVector = child.abcVector
+            assignmentSum += abcVector.assignments
+            branchSum += abcVector.branches
+            conditionSum += abcVector.conditions
+        }
+        count = children.size()
     }
 
-    int getNumberOfChildren() {
-        return children.size()
+    int getCount() {
+        return count
     }
 
     /**
@@ -59,10 +66,9 @@ class AbcAggregateMetricResults implements AggregateMetricResults {
      * and likewise for B and C values. Each component of the result vector is rounded down to an integer.
      */
     Object getAverageAbcVector() {
-        def numberOfAbcVectors = getNumberOfChildren()
-        def a = average(assignmentSum, numberOfAbcVectors)
-        def b = average(branchSum, numberOfAbcVectors)
-        def c = average(conditionSum, numberOfAbcVectors)
+        def a = average(assignmentSum, count)
+        def b = average(branchSum, count)
+        def c = average(conditionSum, count)
         return new AbcVector(a, b, c)
     }
 
@@ -81,8 +87,7 @@ class AbcAggregateMetricResults implements AggregateMetricResults {
     }
 
     String toString() {
-        "AbcAggregateMetricResults[numVectors=${getNumberOfChildren()}, " +
-            "A=$assignmentSum, B=$branchSum, C=$conditionSum, children=$children]"
+        "AggregateAbcMetricResult[count=$count, A=$assignmentSum, B=$branchSum, C=$conditionSum]"
     }
 
     private average(int sum, int count) {

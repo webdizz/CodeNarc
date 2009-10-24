@@ -16,18 +16,19 @@
 package org.gmetrics.metric.abc
 
 /**
- * Tests for AbcComplexityCalculator - calculate ABC complexity for methods
+ * Tests for AbcMetric - calculate ABC complexity for methods
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
+class AbcMetric_MethodTest extends AbstractAbcMetricTest {
+    static metricClass = AbcMetric
 
     void testCalculate_ZeroResultForEmptyMethod() {
         final SOURCE = """
                 def myMethod() { }
         """
-        assert calculateForMethod(SOURCE) == ZERO_VECTOR
+        assertCalculateForMethod(SOURCE, ZERO_VECTOR)
     }
 
     void testCalculate_CountsAssignmentsForVariableDeclarations() {
@@ -39,7 +40,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForMethod(SOURCE) == [2, 0, 0]
+        assertCalculateForMethod(SOURCE, [2, 0, 0])
     }
 
     void testCalculate_IgnoresAssignmentsForConstantDeclarations() {
@@ -50,7 +51,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 final int C2 = 99       // A=0
             }
         """
-        assert calculateForMethod(SOURCE) == [1, 0, 0]
+        assertCalculateForMethod(SOURCE, [1, 0, 0])
     }
 
     void testCalculate_CountsAssignmentsForIncrementAndDecrement() {
@@ -61,7 +62,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 ++y; --x                // A=2
             }
         """
-        assert calculateForMethod(SOURCE) == [4, 0, 0]
+        assertCalculateForMethod(SOURCE, [4, 0, 0])
     }
 
     void testCalculate_CountsAssignmentsForArithmeticOperatorAssignment() {
@@ -72,7 +73,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 x /= 2; y*=3; x%=2      // A=3
             }
         """
-        assert calculateForMethod(SOURCE) == [5, 0, 0]
+        assertCalculateForMethod(SOURCE, [5, 0, 0])
     }
 
     void testCalculate_CountsAssignmentsForShiftOperatorAssignment() {
@@ -82,7 +83,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 y>>>=4              // A=1
             }
         """
-        assert calculateForMethod(SOURCE) == [3, 0, 0]
+        assertCalculateForMethod(SOURCE, [3, 0, 0])
     }
 
     void testCalculate_CountsAssignmentsForBitwiseOperatorAssignment() {
@@ -91,7 +92,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 x &= 2; y|=4; y^=3      // A=3
             }
         """
-        assert calculateForMethod(SOURCE) == [3, 0, 0]
+        assertCalculateForMethod(SOURCE, [3, 0, 0])
     }
 
     void testCalculate_CountsBranchesForMethodCalls() {
@@ -103,7 +104,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 other.method().getSomething()   // B=2
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 5, 0]
+        assertCalculateForMethod(SOURCE, [0, 5, 0])
     }
 
     void testCalculate_CountsBranchesForConstructorCalls() {
@@ -113,7 +114,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 new SomeClass()                 // B=1
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 2, 0]
+        assertCalculateForMethod(SOURCE, [0, 2, 0])
     }
 
     void testCalculate_CountsBranchesForPropertyAccess() {
@@ -122,7 +123,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 myObject.value              // B=1
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 1, 0]
+        assertCalculateForMethod(SOURCE, [0, 1, 0])
     }
 
     void testCalculate_CountsBranchesForNullSafeDereference() {
@@ -132,7 +133,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
             }
         """
         // NOTE: Should this be counted as a condition instead of, or in addition to, a branch?
-        assert calculateForMethod(SOURCE) == [0, 1, 0]
+        assertCalculateForMethod(SOURCE, [0, 1, 0])
     }
 
     void testCalculate_CountsConditionsForComparisonOperators() {
@@ -149,7 +150,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 x ==~ /abc/         // C=1
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 9]
+        assertCalculateForMethod(SOURCE, [0, 0, 9])
     }
 
     void testCalculate_CountsConditionsForIfOnly() {
@@ -159,7 +160,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 1]
+        assertCalculateForMethod(SOURCE, [0, 0, 1])
     }
 
     void testCalculate_CountsConditionsForIfElse() {
@@ -170,7 +171,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 else { }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 2]
+        assertCalculateForMethod(SOURCE, [0, 0, 2])
     }
 
     void testCalculate_CountsConditionsForSwitchWithDefault() {
@@ -183,7 +184,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 3]
+        assertCalculateForMethod(SOURCE, [0, 0, 3])
     }
 
     void testCalculate_CountsConditionsForSwitchWithNoDefault() {
@@ -195,7 +196,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 2]
+        assertCalculateForMethod(SOURCE, [0, 0, 2])
     }
 
     void testCalculate_CountsConditionsForTryWithCatch() {
@@ -207,7 +208,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 catch(Throwable t) { }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 3]
+        assertCalculateForMethod(SOURCE, [0, 0, 3])
     }
 
     void testCalculate_CountsConditionsForTryWithoutCatch() {
@@ -218,7 +219,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 finally { }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 1]
+        assertCalculateForMethod(SOURCE, [0, 0, 1])
     }
 
     void testCalculate_CountsConditionsForTernaryOperator() {
@@ -227,7 +228,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 return !(x < 23) ? 0 : 1
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 2]
+        assertCalculateForMethod(SOURCE, [0, 0, 2])
     }
 
     void testCalculate_CountsConditionsForElvisOperator() {
@@ -236,7 +237,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 return x ?: 1           // C=1 (for unary x) + 1 (for ?)
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 2]
+        assertCalculateForMethod(SOURCE, [0, 0, 2])
     }
 
     void testCalculate_CountsConditionsForUnaryConditionals() {
@@ -248,7 +249,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 if (y) { 99 }
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 4]
+        assertCalculateForMethod(SOURCE, [0, 0, 4])
     }
 
     void testCalculate_CountsConditionsForMultipleBooleanConditionals() {
@@ -257,7 +258,7 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 return x && x > 0 && x < 100 && !ready      // C=4
             }
         """
-        assert calculateForMethod(SOURCE) == [0, 0, 4]
+        assertCalculateForMethod(SOURCE, [0, 0, 4])
     }
 
     void testCalculate_CountsForConstructor() {
@@ -270,21 +271,17 @@ class AbcComplexityCalculator_MethodTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForConstructor(SOURCE) == [2, 1, 2]
+        assertCalculateForConstructor(SOURCE, [2, 1, 2])
     }
 
-    private calculateForMethod(String source) {
-        def classNode = parseClass(source)
-        def methodNode = classNode.methods.find { it.lineNumber >= 0 }
-        assert methodNode
-        return calculate(methodNode)
+    private void assertCalculateForMethod(String source, List expectedValues) {
+        def result = calculateForMethod(source)
+        AbcTestUtil.assertEquals(result, expectedValues)
     }
 
-    private calculateForConstructor(String source) {
-        def classNode = parseClass(source)
-        def constructorNode = classNode.declaredConstructors[0]
-        assert constructorNode
-        return calculate(constructorNode)
+    private void assertCalculateForConstructor(String source, List expectedValues) {
+        def result = calculateForConstructor(source)
+        AbcTestUtil.assertEquals(result, expectedValues)
     }
 
 }

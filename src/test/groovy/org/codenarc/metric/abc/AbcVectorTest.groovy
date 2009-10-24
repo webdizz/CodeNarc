@@ -15,13 +15,15 @@
  */
 package org.gmetrics.metric.abc
 
+import org.gmetrics.test.AbstractTest
+
 /**
  * Tests for AbcVector
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcVectorTest extends AbstractAbcTest {
+class AbcVectorTest extends AbstractTest {
 
     void testPassingNegativeAssignmentsIntoConstructorThrowsException() {
         shouldFailWithMessageContaining('assignments') { new AbcVector(-1, 0, 0) } 

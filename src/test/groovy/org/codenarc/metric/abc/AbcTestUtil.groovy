@@ -15,47 +15,25 @@
  */
 package org.gmetrics.metric.abc
 
-import org.gmetrics.source.SourceString
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.metric.AbstractMetricTest
+import org.gmetrics.metric.MetricResult
 
 /**
- * Tests for AbcComplexityCalculator
+ * Utility methods for ABC test classes
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-abstract class AbstractAbcTest extends AbstractTest {
+abstract class AbcTestUtil {
     protected static final ZERO_VECTOR = [0, 0, 0]
 
-    protected calculator
-
-    void setUp() {
-        super.setUp()
-        calculator = new AbcComplexityCalculator()
-    }
-
-    protected void assertEquals(AbcVector abcVector, List expectedValues) {
+    protected static void assertEquals(AbcVector abcVector, List expectedValues) {
         def actualValues = [abcVector.assignments, abcVector.branches, abcVector.conditions]
         assert actualValues == expectedValues
     }
 
-    protected calculate(node) {
-        def metricResult = calculator.calculate(node)
-        log("metricResult=$metricResult")
-        def abcVector = metricResult.abcVector
-        return [abcVector.assignments, abcVector.branches, abcVector.conditions]
-    }
-
-    protected parseClass(String source) {
-        def sourceCode = new SourceString(source)
-        calculator.sourceCode = sourceCode
-        def ast = sourceCode.ast
-        return ast.classes[0]
-    }
-
-    protected AbcMetricResult abcMetricResult(int a, int b, int c) {
+    protected static AbcMetricResult abcMetricResult(int a, int b, int c) {
         def abcVector = new AbcVector(a, b, c)
         return new AbcMetricResult(abcVector)
     }
-
 }

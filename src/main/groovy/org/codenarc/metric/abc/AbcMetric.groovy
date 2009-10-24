@@ -49,24 +49,28 @@ import org.gmetrics.metric.AbstractMethodMetric
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityCalculator extends AbstractMethodMetric {
+class AbcMetric extends AbstractMethodMetric {
 
     def calculate(MethodNode methodNode) {
-        def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
+        def visitor = new AbcAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
         return new AbcMetricResult(abcVector)
     }
 
     def calculate(ClosureExpression closureExpression) {
-        def visitor = new AbcComplexityAstVisitor(sourceCode:sourceCode)
+        def visitor = new AbcAstVisitor(sourceCode:sourceCode)
         visitor.visitClosureExpression(closureExpression) 
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
         return new AbcMetricResult(abcVector)
     }
 
-    protected createAggregateMetricResults() {
-        return new AbcAggregateMetricResults()
+    protected createAggregateMetricResult(Collection childMetricResults) {
+        new AggregateAbcMetricResult(this, childMetricResults)
     }
+
+//    protected createAggregateMetricResults() {
+//        return new AbcAggregateMetricResults()
+//    }
 
 }

@@ -15,19 +15,26 @@
  */
 package org.gmetrics.metric.abc
 
+import org.gmetrics.metric.MetricLevel
+
 /**
- * Tests for AbcComplexityCalculator class metrics
+ * Tests for AbcMetric calculation of class-level metrics
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
+class AbcMetric_ClassTest extends AbstractAbcMetricTest {
+    static metricClass = AbcMetric
+
+    void testMetricLevelIsMethod() {
+        assert metric.metricLevel == MetricLevel.METHOD
+    }
 
     void testCalculate_EmptyResultsForClassWithNoMethods() {
         final SOURCE = """
             int myValue
         """
-        assertCalculateForClass(SOURCE, ZERO_VECTOR, ZERO_VECTOR, null)
+        assertApplyToClass(SOURCE, ZERO_VECTOR, ZERO_VECTOR, null)
     }
 
     void testCalculate_ResultsForClassWithOneMethod() {
@@ -36,7 +43,7 @@ class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
                 def x = 1               // A=1
             }
         """
-        assertCalculateForClass(SOURCE, [1, 0, 0], [1,0,0], [a:[1, 0, 0]])
+        assertApplyToClass(SOURCE, [1, 0, 0], [1,0,0], [a:[1, 0, 0]])
     }
 
     void testCalculate_ResultsForClassWithSeveralMethods() {
@@ -57,7 +64,7 @@ class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
                 return x && x > 0 && x < 100 && !ready      // C=4
             }
         """
-        assertCalculateForClass(SOURCE, [3,3,6], [1,1,2], [a:[2,0,0], b:[1,3,0], c:[0,0,6]])
+        assertApplyToClass(SOURCE, [3,3,6], [1,1,2], [a:[2,0,0], b:[1,3,0], c:[0,0,6]])
     }
 
     void testCalculate_ResultsForClassWithOneClosureField() {
@@ -70,21 +77,22 @@ class AbcComplexityCalculator_ClassTest extends AbstractAbcTest {
                 }
             }
         """
-        assertCalculateForClass(SOURCE, [2,1,2], [2,1,2], [myClosure:[2,1,2]])
+        assertApplyToClass(SOURCE, [2,1,2], [2,1,2], [myClosure:[2,1,2]])
     }
 
-    private void assertCalculateForClass(String source, List classTotalValues, List classAverageValues, Map methodValues) {
+    protected void assertApplyToClass(String source, classTotalValue, classAverageValue, Map methodValues) {
         def classNode = parseClass(source)
-        def results = calculator.calculate(classNode)
+        def results = metric.applyToClass(classNode)
         log("results=$results")
-//        assert results.name == classNode.name
-        assertEquals(results.averageAbcVector, classAverageValues)
-        assertEquals(results.totalAbcVector, classTotalValues)
+        def classMetricResult = results.classMetricResult
+        AbcTestUtil.assertEquals(classMetricResult.averageAbcVector, classAverageValue)
+        AbcTestUtil.assertEquals(classMetricResult.totalAbcVector, classTotalValue)
 
+        def methodMetricResults = results.methodMetricResults
         def methodNames = methodValues?.keySet()
         methodNames.each { methodName ->
-            def methodAbcVector = results.children[methodName].abcVector
-            assertEquals(methodAbcVector, methodValues[methodName])
+            def methodValue = methodMetricResults[methodName].abcVector
+            AbcTestUtil.assertEquals(methodValue, methodValues[methodName])
         }
     }
 

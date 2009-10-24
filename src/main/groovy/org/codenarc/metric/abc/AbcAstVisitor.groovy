@@ -23,32 +23,14 @@ import org.gmetrics.metric.AbstractAstVisitor
 /**
  * AST Visitor for calculating the ABC Metric for a class/method.
  *
- * The ABC Counting Rules for Groovy:
- * <pre>
- *   1. Add one to the assignment count for each occurrence of an assignment operator, excluding constant declarations:
- *      = *= /= %= += <<= >>= &= |= ^= >>>=
- *   2. Add one to the assignment count for each occurrence of an increment or decrement operator (prefix or postfix):
- *      ++ --
- *   3. Add one to the branch count for each function call or class method call.
- *   4. Add one to the branch count for each occurrence of the new operator.
- *   5. Add one to the condition count for each use of a conditional operator:
- *      == != <= >= < > <=> =~ ==~
- *   6. Add one to the condition count for each use of the following keywords:
- *      else case default try catch ?
- *   7. Add one to the condition count for each unary conditional expression.
- * </pre>
- *
- * Additional notes:
- * <ul>
- *   <li>A property access is treated like a method call (and thus increments the branch count)</li>
- * </ul>
+ * @see AbcMetric
  *
  * See http://www.softwarerenovation.com/ABCMetric.pdf
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityAstVisitor extends AbstractAstVisitor {
+class AbcAstVisitor extends AbstractAstVisitor {
 
     private static final ASSIGNMENT_OPERATIONS =
         ['=', '++', '--', '+=', '-=', '/=', '*=', '%=', '<<=', '>>=', '>>>=', '&=', '|=', '^=']

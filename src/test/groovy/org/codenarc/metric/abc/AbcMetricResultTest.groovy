@@ -15,13 +15,15 @@
  */
 package org.gmetrics.metric.abc
 
+import org.gmetrics.test.AbstractTest
+
 /**
  * Tests for AbcMetricResult
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcMetricResultTest extends AbstractAbcTest {
+class AbcMetricResultTest extends AbstractTest {
 
     void testPassingNullAbcVectorIntoConstructorThrowsException() {
         shouldFailWithMessageContaining('abcVector') { new AbcMetricResult(null) } 
@@ -44,13 +46,13 @@ class AbcMetricResultTest extends AbstractAbcTest {
     }
 
     void testAverageAndTotalValueAreTheSameAsTheValue() {
-        def abc = abcMetricResult(1, 2, 3)
+        def abc = AbcTestUtil.abcMetricResult(1, 2, 3)
         assert abc.totalValue == abc.value
         assert abc.averageValue == abc.value
     }
 
     private abcMetricResultValue(int a, int b, int c) {
-        def abcMetricResult = abcMetricResult(a, b, c)
+        def abcMetricResult = AbcTestUtil.abcMetricResult(a, b, c)
         def value = abcMetricResult.value
         log(abcMetricResult)
         return value

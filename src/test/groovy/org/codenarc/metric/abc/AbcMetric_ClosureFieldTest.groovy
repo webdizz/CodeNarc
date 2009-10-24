@@ -15,15 +15,14 @@
  */
 package org.gmetrics.metric.abc
 
-import org.codehaus.groovy.ast.expr.ClosureExpression
-
 /**
- * Tests for AbcComplexityCalculator for fields initialized to a Closure
+ * Tests for AbcMetric for fields initialized to a Closure
  *
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcComplexityCalculator_ClosureFieldTest extends AbstractAbcTest {
+class AbcMetric_ClosureFieldTest extends AbstractAbcMetricTest {
+    static metricClass = AbcMetric
 
     void testCalculate_ZeroResultForEmptyClosure() {
         final SOURCE = """
@@ -32,7 +31,7 @@ class AbcComplexityCalculator_ClosureFieldTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForField(SOURCE) == ZERO_VECTOR
+        assertCalculateForClosureField(SOURCE, ZERO_VECTOR)
     }
 
     void testCalculate_CountsForClosureField() {
@@ -45,19 +44,12 @@ class AbcComplexityCalculator_ClosureFieldTest extends AbstractAbcTest {
                 }
             }
         """
-        assert calculateForField(SOURCE) == [2, 1, 2]
+        assertCalculateForClosureField(SOURCE, [2, 1, 2])
     }
 
-    private calculateForField(String source) {
-        def fieldNode = findFirstField(source)
-        assert fieldNode.initialExpression
-        assert fieldNode.initialExpression instanceof ClosureExpression
-        return calculate(fieldNode.initialExpression)
-    }
-
-    private findFirstField(String source) {
-        def classNode = parseClass(source)
-        return classNode.fields.find { it.lineNumber >= 0 }
+    private void assertCalculateForClosureField(String source, List expectedValues) {
+        def result = calculateForClosureField(source)
+        AbcTestUtil.assertEquals(result, expectedValues)
     }
 
  }
