@@ -42,7 +42,7 @@ class AggregateAbcMetricResult implements MetricResult {
             branchSum += abcVector.branches
             conditionSum += abcVector.conditions
         }
-        count = children.size()
+        count = children.inject(0) { value, child -> value + child.count }
     }
 
     int getCount() {
@@ -57,6 +57,10 @@ class AggregateAbcMetricResult implements MetricResult {
      */
     Object getTotalAbcVector() {
         return new AbcVector(assignmentSum, branchSum, conditionSum)
+    }
+
+    Object getAbcVector() {
+        return getTotalAbcVector()
     }
 
     /**

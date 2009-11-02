@@ -87,6 +87,11 @@ class AggregateAbcMetricResultTest extends AbstractTest {
         AbcTestUtil.assertEquals(aggregateAbcMetricResult.totalAbcVector, [27, 12, 66])
     }
 
+    void testAbcVectorIsTheSameAsTheTotalAbcVector() {
+        initializeWithThreeChildMetricResults()
+        AbcTestUtil.assertEquals(aggregateAbcMetricResult.abcVector, [27, 12, 66])
+    }
+
     void testTotalValueForSeveralVectorsIsTheMagnitudeOfTheSumOfTheVectors() {
         initializeWithThreeChildMetricResults()
         assert aggregateAbcMetricResult.totalValue == new AbcVector(27, 12, 66).magnitude
@@ -100,6 +105,12 @@ class AggregateAbcMetricResultTest extends AbstractTest {
     void testCorrectCountForSeveralVectors() {
         initializeWithThreeChildMetricResults()
         assert aggregateAbcMetricResult.count == 3
+    }
+
+    void testCorrectCountForChildResultsWithCountsGreaterThanOne() {
+        initializeWithThreeChildMetricResults()
+        def aggregate = new AggregateAbcMetricResult(METRIC, [aggregateAbcMetricResult, aggregateAbcMetricResult])
+        assert aggregate.count == 6
     }
 
     private void initializeWithZeroChildMetricResults() {
