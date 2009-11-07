@@ -50,6 +50,7 @@ import org.gmetrics.metric.AbstractMethodMetric
  * @version $Revision$ - $Date$
  */
 class AbcMetric extends AbstractMethodMetric {
+    final String name = "ABC"
 
     def calculate(MethodNode methodNode) {
         def visitor = new AbcAstVisitor(sourceCode:sourceCode)

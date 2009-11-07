@@ -31,6 +31,7 @@ import org.gmetrics.util.AstUtil
  * @version $Revision$ - $Date$
  */
 class MethodLinesOfCodeMetric extends AbstractMethodMetric {
+    final String name = 'MethodSize'
 
     def calculate(MethodNode methodNode) {
         def visitor = new MethodLinesOfCodeAstVisitor(sourceCode:sourceCode)
