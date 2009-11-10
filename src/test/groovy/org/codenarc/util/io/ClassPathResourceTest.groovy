@@ -15,7 +15,8 @@
  */
 package org.gmetrics.util.io
 
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.test.AbstractTestCase
+import org.gmetrics.test.AbstractTestCase
 
 /**
  * Tests for ClassPathResource
@@ -23,7 +24,7 @@ import org.gmetrics.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class ClassPathResourceTest extends AbstractTest {
+class ClassPathResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'resource/SampleResource.txt'
     private static final TEXT_FILE_CONTENTS = 'abcdef12345'

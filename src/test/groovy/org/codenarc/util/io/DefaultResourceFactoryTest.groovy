@@ -15,7 +15,7 @@
  */
 package org.gmetrics.util.io
 
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.test.AbstractTestCase
 
 /**
  * Tests for DefaultResourceFactory
@@ -23,7 +23,7 @@ import org.gmetrics.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class DefaultResourceFactoryTest extends AbstractTest {
+class DefaultResourceFactoryTest extends AbstractTestCase {
 
     private static final PATH = 'src/test/resources/resource/SampleResource.txt'
     private resourceFactory

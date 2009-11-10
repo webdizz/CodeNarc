@@ -15,7 +15,8 @@
  */
 package org.gmetrics.metric.abc
 
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.test.AbstractTestCase
+import org.gmetrics.test.AbstractTestCase
 
 /**
  * Tests for AbcMetricResult
@@ -23,7 +24,7 @@ import org.gmetrics.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AbcMetricResultTest extends AbstractTest {
+class AbcMetricResultTest extends AbstractTestCase {
 
     void testPassingNullAbcVectorIntoConstructorThrowsException() {
         shouldFailWithMessageContaining('abcVector') { new AbcMetricResult(null) } 

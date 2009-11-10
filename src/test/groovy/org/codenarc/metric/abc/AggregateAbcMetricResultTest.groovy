@@ -16,7 +16,8 @@
 package org.gmetrics.metric.abc
 
 import org.gmetrics.metric.Metric
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.test.AbstractTestCase
+import org.gmetrics.test.AbstractTestCase
 
 /**
  * Tests for AggregateAbcMetricResult
@@ -24,7 +25,7 @@ import org.gmetrics.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class AggregateAbcMetricResultTest extends AbstractTest {
+class AggregateAbcMetricResultTest extends AbstractTestCase {
 
     private static final METRIC = [:] as Metric
     private aggregateAbcMetricResult

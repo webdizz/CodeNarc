@@ -15,7 +15,8 @@
  */
 package org.gmetrics.util.io
 
-import org.gmetrics.test.AbstractTest
+import org.gmetrics.test.AbstractTestCase
+import org.gmetrics.test.AbstractTestCase
 
 /**
  * Tests for UrlResource
@@ -23,7 +24,7 @@ import org.gmetrics.test.AbstractTest
  * @author Chris Mair
  * @version $Revision$ - $Date$
  */
-class UrlResourceTest extends AbstractTest {
+class UrlResourceTest extends AbstractTestCase {
 
     private static final TEXT_FILE = 'src/test/resources/resource/SampleResource.txt'
     private static final RELATIVE_FILE_URL = 'file:' + TEXT_FILE
