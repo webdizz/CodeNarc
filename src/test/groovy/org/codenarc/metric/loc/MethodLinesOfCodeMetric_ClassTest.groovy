@@ -68,7 +68,7 @@ class MethodLinesOfCodeMetric_ClassTest extends AbstractMetricTest {
                 return x
             }
         """
-        assertApplyToClass(SOURCE, 16, 16/3, [a:3, b:5, c:8])
+        assertApplyToClass(SOURCE, 16, scale(16/3), [a:3, b:5, c:8])
     }
 
     void testApplyToClass_ResultsForClassWithOneClosureField() {
