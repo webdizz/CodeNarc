@@ -18,6 +18,7 @@ package org.gmetrics.metric.abc
 import org.codehaus.groovy.ast.MethodNode
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.gmetrics.metric.AbstractMethodMetric
+import org.gmetrics.source.SourceCode
 
 /**
  * Calculate the ABC Metric for a class/method.
@@ -52,14 +53,14 @@ import org.gmetrics.metric.AbstractMethodMetric
 class AbcMetric extends AbstractMethodMetric {
     final String name = "ABC"
 
-    def calculate(MethodNode methodNode) {
+    def calculate(MethodNode methodNode, SourceCode sourceCode) {
         def visitor = new AbcAstVisitor(sourceCode:sourceCode)
         visitor.visitMethod(methodNode)
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
         return new AbcMetricResult(abcVector)
     }
 
-    def calculate(ClosureExpression closureExpression) {
+    def calculate(ClosureExpression closureExpression, SourceCode sourceCode) {
         def visitor = new AbcAstVisitor(sourceCode:sourceCode)
         visitor.visitClosureExpression(closureExpression) 
         def abcVector = new AbcVector(visitor.numberOfAssignments, visitor.numberOfBranches, visitor.numberOfConditions)
@@ -69,9 +70,5 @@ class AbcMetric extends AbstractMethodMetric {
     protected createAggregateMetricResult(Collection childMetricResults) {
         new AggregateAbcMetricResult(this, childMetricResults)
     }
-
-//    protected createAggregateMetricResults() {
-//        return new AbcAggregateMetricResults()
-//    }
 
 }

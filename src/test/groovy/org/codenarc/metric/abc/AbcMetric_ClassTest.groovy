@@ -82,7 +82,7 @@ class AbcMetric_ClassTest extends AbstractAbcMetricTest {
 
     protected void assertApplyToClass(String source, classTotalValue, classAverageValue, Map methodValues) {
         def classNode = parseClass(source)
-        def results = metric.applyToClass(classNode)
+        def results = metric.applyToClass(classNode, sourceCode)
         log("results=$results")
         def classMetricResult = results.classMetricResult
         AbcTestUtil.assertEquals(classMetricResult.averageAbcVector, classAverageValue)
