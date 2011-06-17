@@ -2,6 +2,12 @@ CodeNarc Change Log
 -------------------------------------------------------------------------------
 http://www.codenarc.org
 
+Changes in version 0.14.1 (??? 2011)
+-------------------------------------------
+BUG FIXES
+- #3317632: CloneableWithoutClone - false positive.
+
+
 Changes in version 0.14 (June 2011)
 -------------------------------------------
 NEW AND UPDATED RULES
