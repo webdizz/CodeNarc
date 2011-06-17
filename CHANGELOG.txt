@@ -6,7 +6,7 @@ Changes in version 0.14.1 (??? 2011)
 -------------------------------------------
 BUG FIXES
 - #3317632: CloneableWithoutClone - false positive.
-
+- #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
 
 Changes in version 0.14 (June 2011)
 -------------------------------------------
