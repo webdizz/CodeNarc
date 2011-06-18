@@ -21,7 +21,7 @@ import org.codenarc.util.AstUtil
 import org.codenarc.util.ImportUtil
 
 /**
- * Rule that checks for imports from any packages that are
+ * Rule that checks for non-static imports from any packages that are
  * automatically imported by Groovy, including:
  * <ul>
  *   <li>java.io</li>
@@ -43,7 +43,7 @@ class UnnecessaryGroovyImportRule extends AbstractRule {
 
     void applyTo(SourceCode sourceCode, List violations) {
         if (sourceCode.ast?.imports || sourceCode.ast?.starImports) {
-            ImportUtil.getImportsSortedByLineNumber(sourceCode).each { importNode ->
+            ImportUtil.getNonStaticImportsSortedByLineNumber(sourceCode).each { importNode ->
                 def importClassName = importNode.className
                 def importPackageName = ImportUtil.packageNameForImport(importNode)
 
