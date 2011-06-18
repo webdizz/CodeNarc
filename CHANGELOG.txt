@@ -8,6 +8,7 @@ BUG FIXES
 - #3317632: CloneableWithoutClone - false positive.
 - #3315990: StaticXxxField false positive on initializer: StaticSimpleDateFormatField, StaticDateFormatField, StaticCalendarField.
 - #3314773: UnnecessaryGroovyImportRule: false positive on static imports
+- #3315992: ClosureAsLastMethodParameter - false positive, when method call surrounded by parentheses.
 
 
 Changes in version 0.14 (June 2011)
