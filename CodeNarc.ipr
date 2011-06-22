@@ -370,18 +370,18 @@
                     <value>
                       <list>
                         <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308272600276" />
-                          <option name="revision" value="763" />
+                          <option name="creationDateMillis" value="1308705588714" />
+                          <option name="revision" value="772" />
                           <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk/src" />
                         </SvnBranchItem>
                         <SvnBranchItem>
-                          <option name="creationDateMillis" value="1308272600276" />
-                          <option name="revision" value="763" />
+                          <option name="creationDateMillis" value="1308705588714" />
+                          <option name="revision" value="772" />
                           <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk/CHANGELOG.txt" />
                         </SvnBranchItem>
                         <SvnBranchItem>
-                          <option name="creationDateMillis" value="1307930478660" />
-                          <option name="revision" value="761" />
+                          <option name="creationDateMillis" value="1308364127346" />
+                          <option name="revision" value="768" />
                           <option name="url" value="https://codenarc.svn.sourceforge.net/svnroot/codenarc/trunk/CodeNarc.ipr" />
                         </SvnBranchItem>
                         <SvnBranchItem>
