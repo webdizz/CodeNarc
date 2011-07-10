@@ -12,6 +12,7 @@ BUG FIXES
 - #3315946: Cmdline runner does not respect -includes and -excludes.  (Fixed by René Scheibe)
 - #3314576: UnnecessaryPublicModifierRule: MissingPropertyException.  (Fixed by René Scheibe)
 - #3322395: JUnitTestMethodWithoutAssert - Added support for parameters in the @Test annotation. E.g.: @Test(expected = IllegalArgumentException) and @Test(timeout = 1000).   (Fixed by René Scheibe)
+- #3361263: IllegalPackageReferenceRule: Also check constructor parameter types and type coercion (x as Type).
 
 
 Changes in version 0.14 (June 2011)

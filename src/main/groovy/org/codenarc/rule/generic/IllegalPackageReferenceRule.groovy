@@ -82,15 +82,15 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
         super.visitVariableExpression(expression)
     }
 
+
     @Override
-    void visitMethodEx(MethodNode node) {
+    protected void visitConstructorOrMethodEx(MethodNode node, boolean isConstructor) {
         if (!node.isDynamicReturnType()) {       // ignore 'def' which resolves to java.lang.Object
             checkType(node.returnType.name, node)
         }
         node.parameters.each { parameter ->
             checkTypeIfNotDynamicallyTyped(parameter)
         }
-        super.visitMethodEx(node)
     }
 
     @Override
@@ -99,6 +99,12 @@ class IllegalPackageReferenceAstVisitor extends AbstractAstVisitor {
             checkTypeIfNotDynamicallyTyped(parameter)
         }
         super.visitClosureExpression(expression)
+    }
+
+    @Override
+    void visitCastExpression(CastExpression expression) {
+        checkType(expression.type.name, expression)
+        super.visitCastExpression(expression)
     }
 
     @Override
