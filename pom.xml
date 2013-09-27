@@ -11,7 +11,6 @@
     </description>
     <packaging>jar</packaging>
     <version>0.19</version>
-    <url>http://codenarc.sourceforge.net/</url>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -22,13 +21,6 @@
     <properties>
         <targetJdk>1.5</targetJdk> <!-- Necessary for PMD plugin -->
     </properties>
-
-    <scm>
-        <connection>scm:git:git@github.com:CodeNarc/CodeNarc.git</connection>
-        <url>scm:git:git@github.com:CodeNarc/CodeNarc.git</url>
-        <developerConnection>scm:git:git@github.com:CodeNarc/CodeNarc.git</developerConnection>
-      <tag>CodeNarc-0.19</tag>
-  </scm>
 
     <dependencies>
 
@@ -149,15 +141,6 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.3.2</version>
@@ -168,25 +151,6 @@
 
     <reporting>
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <!-- <report>dependencies</report> -->
-                            <!-- <report>project-team</report> -->
-                            <!-- <report>mailing-list</report> -->
-                            <!-- <report>cim</report> -->
-                            <!-- <report>issue-tracking</report> -->
-                            <report>license</report>
-                            <!-- <report>scm</report> -->
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
@@ -205,26 +169,5 @@
 
         </plugins>
     </reporting>
-
-    <developers>
-        <developer>
-            <id>chrismair</id>
-            <name>Chris Mair</name>
-            <email>chrismair@users.sourceforge.net</email>
-            <url>https://sourceforge.net/users/chrismair</url>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>-4</timezone>
-        </developer>
-    </developers>
-
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
 </project>
