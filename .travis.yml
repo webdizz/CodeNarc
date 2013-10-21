@@ -9,5 +9,4 @@ before_install:
 install:
   bundle install
 script:
-  bundle exec buildr clean test:'-SpaceAfterCommaRuleTest'
-  
+  bundle exec buildr clean test:'-SpaceAfterCommaRuleTest,-SpaceAfterCommaRuleTest'
