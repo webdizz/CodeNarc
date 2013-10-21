@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - jruby-18mode
+jdk:
+  - oraclejdk7
+before_install:
+  - gem update --system
+  - gem --version
+install:
+  bundle install
+script:
+  bundle exec buildr clean test:-SpaceAfterCommaRuleTest
+  
