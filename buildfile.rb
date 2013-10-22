@@ -8,4 +8,5 @@ define 'codenarc' do
   project.version = '0.19'
   compile.from('src/main/java').with 'log4j:log4j:jar:1.2.13', 'org.gmetrics:GMetrics:jar:0.5', "org.codehaus.groovy:groovy-all:jar:#{groovyVersion}"
   compile.from('src/main/groovy').using(:groovyc).with 'junit:junit:jar:4.8.2'
+  package :jar
 end
